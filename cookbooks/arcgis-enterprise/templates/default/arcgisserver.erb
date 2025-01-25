@@ -10,7 +10,7 @@
 ### END INIT INFO
 
 invoker=`id | cut -f 2 -d '(' | cut -f 1 -d ')'`
-agsfilecheck=framework/etc/arcgis-framework.properties
+agsfilecheck=framework/etc/<%=@agsproperties%>
 
 rwd=`dirname $0`/../../..
 if [ -L "$0" ]; then

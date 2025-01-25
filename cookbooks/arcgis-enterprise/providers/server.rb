@@ -704,7 +704,14 @@ action :configure_autostart do
     if node['init_package'] == 'init'
       arcgisserver_path = '/etc/init.d/arcgisserver'
       service_file = 'arcgisserver.erb'
-      template_variables = ({ :agshome => agshome })
+
+      if node['arcgis']['version'].start_with? '10.4'
+        properties_file = 'arcgis-server-framework.properties'
+      else
+        properties_file = 'arcgis-framework.properties'
+      end
+
+      template_variables = ({ :agshome => agshome, :agsproperties => properties_file })
     # Systemd
     else node['init_package'] == 'systemd'
       arcgisserver_path = '/etc/systemd/system/arcgisserver.service'
